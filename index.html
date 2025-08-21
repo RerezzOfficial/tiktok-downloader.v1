@@ -45,8 +45,8 @@
             background-color: var(--background-color);
             color: var(--text-color);
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: center;
             min-height: 100vh;
             padding: 20px;
             transition: background-color 0.3s ease, color 0.3s ease;
@@ -308,20 +308,68 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-
+        
         footer {
             text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            color: #fff;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.1);
+        }
+
+        .social-link.whatsapp-channel { background-color: #128C7E; }
+        .social-link.whatsapp-group { background-color: #25D366; }
+        .social-link.youtube { background-color: #FF0000; }
+
+        .social-link i {
+            font-size: 1.3rem;
+        }
+        
+        .copyright {
             margin-top: 30px;
-            color: var(--text-muted-color);
             font-size: 0.9rem;
+            color: var(--text-muted-color);
         }
 
         @media (max-width: 640px) {
             body {
                 padding: 10px;
             }
-            .container {
-                padding: 20px;
+            .container, footer {
+                padding-left: 20px;
+                padding-right: 20px;
             }
             header h1 {
                 font-size: 1.8rem;
@@ -392,6 +440,25 @@
             </div>
         </section>
     </main>
+    
+    <footer>
+        <h2 class="footer-title">Ikuti Kami</h2>
+        <div class="social-links">
+            <a href="https://whatsapp.com/channel/0029Vat4lwpKLaHoS0MAwj3Z" target="_blank" class="social-link whatsapp-channel">
+                <i class="bi bi-whatsapp"></i>
+                <span>Saluran Wa</span>
+            </a>
+            <a href="https://chat.whatsapp.com/J2KV9Wydi3v5panKYX3VIv" target="_blank" class="social-link whatsapp-group">
+                <i class="bi bi-whatsapp"></i>
+                <span>Grup Chat</span>
+            </a>
+            <a href="https://www.youtube.com/@Rerezz-Official" target="_blank" class="social-link youtube">
+                <i class="bi bi-youtube"></i>
+                <span>YouTube</span>
+            </a>
+        </div>
+        <p class="copyright"><b style="color: cyan;">&copy;</b> 2025 TikTok Downloader V1 <b style="color: red;">|</b> By Its Me Rerezz.</p>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -504,11 +571,4 @@
         });
     </script>
 </body>
-<!--
-Channel Official: https://whatsapp.com/channel/0029Vat4lwpKLaHoS0MAwj3Z
-Youtube Official: https://www.youtube.com/@Rerezz-Official
-Chats Groups: https://chat.whatsapp.com/J2KV9Wydi3v5panKYX3VIv?mode=ems_copy_c
-
-MAU GW RAJIN UPLOAD? JOIN CH LAH
--->
-  </html>
+</html>
