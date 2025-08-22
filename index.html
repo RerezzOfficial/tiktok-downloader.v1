@@ -514,18 +514,34 @@
                 showStatus('Sedang memproses...', 'loading');
                 
                 try {
-                    const apiUrl = `https://api.im-rerezz.xyz/api/dl/tiktokv2?url=${encodeURIComponent(url)}&apikey=${API_KEY}`;
-                    const response = await axios.get(apiUrl);
+                    const targetApiUrl = `https://api.im-rerezz.xyz/api/dl/tiktokv2?url=${encodeURIComponent(url)}&apikey=${API_KEY}`;
+                    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetApiUrl)}`;
                     
-                    if (response.data && response.data.status && response.data.data) {
-                        displayResults(response.data.data);
-                        showStatus('Berhasil ditemukan!', 'success');
+                    const response = await axios.get(proxyUrl);
+                    
+                    if (response.data && response.data.contents) {
+                        const apiData = JSON.parse(response.data.contents);
+
+                        if (apiData.status && apiData.data) {
+                            displayResults(apiData.data);
+                            showStatus('Berhasil ditemukan!', 'success');
+                        } else {
+                            throw new Error(apiData.message || 'URL tidak valid atau video tidak dapat ditemukan.');
+                        }
                     } else {
-                        throw new Error(response.data.message || 'URL tidak valid atau video tidak dapat ditemukan.');
+                        throw new Error('Gagal mengambil data dari proxy.');
                     }
 
                 } catch (error) {
-                    showStatus(`Terjadi kesalahan: ${error.message}`, 'error');
+                    let errorMessage = 'Terjadi kesalahan tidak diketahui.';
+                    if (error.response) {
+                        errorMessage = `Kesalahan server: ${error.response.status}`;
+                    } else if (error.request) {
+                        errorMessage = 'Tidak ada respon dari server. Periksa koneksi internet Anda.';
+                    } else {
+                        errorMessage = error.message;
+                    }
+                    showStatus(`Terjadi kesalahan: ${errorMessage}`, 'error');
                     resultContainer.style.display = 'none';
                 } finally {
                     setLoading(false);
@@ -566,4 +582,4 @@
         });
     </script>
 </body>
-    </html>
+                </html>
